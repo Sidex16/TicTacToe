@@ -1,2 +1,2 @@
 # TicTacToe
-This is my first middle nicety project
+This is my first middle nicety project on C++
