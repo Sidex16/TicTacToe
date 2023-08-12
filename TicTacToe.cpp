@@ -9,16 +9,17 @@ public:
 	{
 		enter();
 
-		display();
-
 		while (true)
 		{
+			system("cls");
+			display();
 			excahngex();
 			if (winx == 1)
 			{
 				break;
 			}
-
+			system("cls");
+			display();
 			excahngeo();
 			if (wino == 1)
 			{
@@ -26,8 +27,6 @@ public:
 			}
 		}
 		displayw();
-
-
 	}
 
 private:
@@ -43,21 +42,21 @@ private:
 #endif
 	}
 
-	void enter() {
-		for (int i = 1; i < 4; i++) 
+	void enter()
+	{
+		for (int i = 1; i < 4; i++)
 		{
 			for (int j = 1; j < 4; j++)
 			{
 				field[i][j] = '#';
 			}
-
 		}
-
-
 	}
-	void display() {
+
+	void display()
+	{
 		line();
-		for (int i = 1; i < 4; i++) 
+		for (int i = 1; i < 4; i++)
 		{
 			cout << '\t' << "     ";
 			for (int j = 1; j < 4; j++)
@@ -67,12 +66,11 @@ private:
 			cout << endl;
 		}
 	}
-	void displayw() 
+
+	void displayw()
 	{
 		clearScreen();
-
 		display();
-
 		line();
 		if (wino == 1)
 			cout << '\t' << "Player 'o' wins!" << endl;
@@ -82,147 +80,108 @@ private:
 
 		line();
 	}
+
 	void excahngex()
 	{
+		int x, y;
 	x:
 		line();
-		int x, y;
 		cout << "Player x's turn!" << endl;
-		cout << "Enter the collon (x coordinate):" << endl;
+		cout << "Enter the column (x coordinate):" << endl;
 		cin >> x;
 		cout << "Enter the row (y coordinate):" << endl;
 		cin >> y;
 		line();
-		if (field[y][x] == '#')
-			field[y][x] = 'x';
-		else {
+
+		if (x < 1 || x > 3 || y < 1 || y > 3 || field[y][x] != '#')
+		{
 			clearScreen();
-			cout << "Enter the correct cell!" << endl;
+			cout << "Enter a valid cell!" << endl;
 			display();
 			goto x;
 		}
 
-		clearScreen();
-
-		if (field[1][1] == 'x' and field[1][2] == 'x' and field[1][3] == 'x') 
-		{
-			winx = 1;
-		}
-
-		if (field[2][1] == 'x' and field[2][2] == 'x' and field[2][3] == 'x')
-		{
-			winx = 1;
-		}
-
-		{
-			winx = 1;
-		}
-
-		if (field[1][1] == 'x' and field[2][1] == 'x' and field[3][1] == 'x')
-		{
-			winx = 1;
-		}
-
-		if (field[1][2] == 'x' and field[2][2] == 'x' and field[3][2] == 'x')
-		{
-			winx = 1;
-		}
-
-		if (field[1][3] == 'x' and field[2][3] == 'x' and field[3][3] == 'x') 
-		{
-			winx = 1;
-		}
-
-		if (field[1][1] == 'x' and field[2][2] == 'x' and field[3][3] == 'x') 
-		{
-			winx = 1;
-		}
-
-		if (field[1][3] == 'x' and field[2][2] == 'x' and field[3][1] == 'x') 
-		{
-			winx = 1;
-		}
-
+		field[y][x] = 'x';
+		checkWin('x');
 		display();
-
 	}
-	void excahngeo() 
+
+	void excahngeo()
 	{
+		int x, y;
 	o:
 		line();
-		int x, y;
 		cout << "Player o's turn!" << endl;
-		cout << "Enter the collon (x coordinate):" << endl;
+		cout << "Enter the column (x coordinate):" << endl;
 		cin >> x;
 		cout << "Enter the row (y coordinate):" << endl;
 		cin >> y;
 		line();
 
-		if (field[y][x] == '#')
-			field[y][x] = 'o';
-		else 
+		if (x < 1 || x > 3 || y < 1 || y > 3 || field[y][x] != '#')
 		{
 			clearScreen();
-			cout << "Enter the correct cell!" << endl;
+			cout << "Enter a valid cell!" << endl;
 			display();
 			goto o;
 		}
 
-		clearScreen();
-
-		if (field[1][1] == 'o' and field[1][2] == 'o' and field[1][3] == 'o') 
-		{
-			wino = 1;
-		}
-
-		if (field[2][1] == 'o' and field[2][2] == 'o' and field[2][3] == 'o') 
-		{
-			wino = 1;
-		}
-
-		if (field[3][1] == 'o' and field[3][2] == 'o' and field[3][3] == 'o')
-		{
-			wino = 1;
-		}
-
-		if (field[1][1] == 'o' and field[2][1] == 'o' and field[3][1] == 'o') 
-		{
-			wino = 1;
-		}
-
-		if (field[1][2] == 'o' and field[2][2] == 'o' and field[3][2] == 'o')
-		{
-			wino = 1;
-		}
-
-		if (field[1][3] == 'o' and field[2][3] == 'o' and field[3][3] == 'o')
-		{
-			wino = 1;
-		}
-
-		if (field[1][1] == 'o' and field[2][2] == 'o' and field[3][3] == 'o')
-		{
-			wino = 1;
-		}
-
-		if (field[1][3] == 'o' and field[2][2] == 'o' and field[3][1] == 'o')
-		{
-			wino = 1;
-		}
+		field[y][x] = 'o';
+		checkWin('o');
 		display();
 	}
-	void line() 
+
+	void checkWin(char player)
+	{
+		for (int i = 1; i <= 3; i++)
+		{
+			if (field[i][1] == player && field[i][2] == player && field[i][3] == player)
+			{
+				if (player == 'x')
+					winx = 1;
+				else
+					wino = 1;
+				return;
+			}
+
+			if (field[1][i] == player && field[2][i] == player && field[3][i] == player)
+			{
+				if (player == 'x')
+					winx = 1;
+				else
+					wino = 1;
+				return;
+			}
+		}
+
+		if (field[1][1] == player && field[2][2] == player && field[3][3] == player)
+		{
+			if (player == 'x')
+				winx = 1;
+			else
+				wino = 1;
+			return;
+		}
+
+		if (field[1][3] == player && field[2][2] == player && field[3][1] == player)
+		{
+			if (player == 'x')
+				winx = 1;
+			else
+				wino = 1;
+			return;
+		}
+	}
+
+	void line()
 	{
 		cout << "<----------------------------->" << endl;
 	}
-
 };
 
 int main()
 {
 	TicTacToe ti;
-
 	ti.ui();
-
 	return 0;
 }
